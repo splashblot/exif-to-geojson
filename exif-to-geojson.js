@@ -13,6 +13,9 @@ var geojson = {
 };
 
 function exifToFeature(exifData) {
+  console.info('exifData: ' + exifData);
+  console.info('exifData.gps: ' + exifData.gps);
+  console.info('exifData.gps.GPSLatitude: ' + exifData.gps.GPSLatitude);
   var gps = exifData.gps;
   if (!gps.GPSLatitude) {
     throw "No GPS data";
@@ -37,7 +40,8 @@ function exifToFeature(exifData) {
   };
   feat.properties.exif = exifData;
 
-  // time the gps coordinate was taken
+  /* time the gps coordinate was taken
+  console.info('gps.GPSDateStamp: ' + gps.GPSDateStamp);
   var gpsDateArr = gps.GPSDateStamp.split(':');
   var gpsDate = new Date(Date.UTC( parseInt(gpsDateArr[0]),
                                    parseInt(gpsDateArr[1]) - 1 , // Jan is 0
@@ -46,7 +50,7 @@ function exifToFeature(exifData) {
                                    gps.GPSTimeStamp[1],
                                    gps.GPSTimeStamp[2] ) );
   feat.properties.gpsTime = gpsDate.getTime();
-  feat.properties.gpsTimeStr = gpsDate.toString();
+  feat.properties.gpsTimeStr = gpsDate.toString(); */
 
   // time the actual picture was taken.
   // NH FIXME: We are assuming the pic was taken in the current timezone?
